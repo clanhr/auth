@@ -4,15 +4,17 @@
            [result.core :as result]
            [clanhr.auth.core :as auth]))
 
+(def secret "test")
+
 (deftest validate-user-token-test
   (let [data {:user "bob the builder"
               :email "bob@mail.com"
               :password "spoon"}
         token (auth/token-for data secret)]
     (testing "should succeeded"
-      (let [validated-result (validate-token/run token)]
+      (let [validated-result (validate-token/run token secret)]
         (is (result/succeeded? validated-result))
     (testing "should failed"
       (let [another-token "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
-            validate-result (validate-token/run another-token)]
+            validate-result (validate-token/run another-token secret)]
         (is (result/failed? validate-result))))))))
