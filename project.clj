@@ -1,5 +1,5 @@
-(defproject auth "0.1.0"
-  :description "FIXME: write description"
+(defproject auth "0.2.0"
+  :description "ClanHR's Auth Library"
   :url "https://github.com/clanhr/auth"
   :license {:name "The MIT License"
             :url "file://LICENSE"}
