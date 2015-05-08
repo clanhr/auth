@@ -4,7 +4,7 @@
             [clj-jwt.core  :refer :all]
             [clj-time.core :refer [now plus days]]))
 
-(defn- secret
+(defn secret
   "Returns a secret based on environment variables"
   []
   (env :secret))
