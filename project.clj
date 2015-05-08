@@ -10,4 +10,7 @@
                  [clanhr/result "0.2.0"]
                  [clanhr/reply "0.1.0"]
                  [clj-jwt "0.0.13"]
-                 [clj-time "0.9.0"]])
+                 [clj-time "0.9.0"]]
+  :plugins [[lein-environ "1.0.0"]]
+  :profiles {:test {:env {:secret "test_secret"}}
+             :dev {:env {:secret "dev_secret"}}})

@@ -4,14 +4,12 @@
   (use clojure.test
         ring.mock.request))
 
-(def secret "test")
-
 (deftest auth-test
 
   (let [response-hash {:status 200 :headers {} :body "Foo"}
         data {:user "bob_the_builder"
               :password "spoon"}
-        token (auth/token-for data secret)]
+        token (auth/token-for data)]
     (testing "should pass"
       (letfn [(handler [request]
                 response-hash)]

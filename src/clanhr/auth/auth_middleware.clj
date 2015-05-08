@@ -7,7 +7,7 @@
 
 (defn valid?
   [token]
-  (validator/run token "test"))
+  (validator/run token))
 
 (defn extract-token-from
   [context]
