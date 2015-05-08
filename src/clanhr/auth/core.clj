@@ -4,6 +4,11 @@
             [clj-jwt.core  :refer :all]
             [clj-time.core :refer [now plus days]]))
 
+(defn- secret
+  "Returns a secret based on environment variables"
+  []
+  (env :secret))
+
 (defn build-claim
   "Build a claim"
   [user]
@@ -13,10 +18,10 @@
 
 (defn token-for
   "Creates a token for a user"
-  [args secret]
+  [args]
   (-> (build-claim (args :user))
       jwt
-      (sign :HS256 secret)
+      (sign :HS256 (secret))
       to-str))
 
 (defn parse
@@ -26,9 +31,9 @@
 
 (defn valid?
   "Check if token is valid"
-  [token secret]
+  [token]
   (if token
-    (verify token secret)
+    (verify token (secret))
     false))
 
 (defn principal
