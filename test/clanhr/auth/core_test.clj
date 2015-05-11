@@ -25,3 +25,7 @@
   (let [fake-token "qwjkekwqbebdqwjebdqwjb"
         principal (auth/principal fake-token)]
     (is (not principal))))
+
+(deftest throw-if-no-secret
+  (is (thrown-with-msg? Exception #"Can't resolve auth token" (auth/secret {}))))
+
