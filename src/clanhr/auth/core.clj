@@ -10,7 +10,7 @@
    (secret env))
   ([env]
    (or
-     (:clanhr_auth_secret env)
+     (:clanhr-auth-secret env)
      (:secret env)
      (throw (Exception. "Can't resolve auth token")))))
 
