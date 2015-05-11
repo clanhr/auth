@@ -2,6 +2,6 @@
 
 [![Clojars Project](http://clojars.org/clanhr/auth/latest-version.svg)](http://clojars.org/clanhr/auth)
 
-Auth utilities on top of JWT.
+Auth utilities on top of JWT and ring middlewares.
 
 
