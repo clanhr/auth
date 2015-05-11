@@ -6,8 +6,13 @@
 
 (defn secret
   "Returns a secret based on environment variables"
-  []
-  (env :secret))
+  ([]
+   (secret env))
+  ([env]
+   (or
+     (:clanhr_auth_secret env)
+     (:secret env)
+     (throw (Exception. "Can't resolve auth token")))))
 
 (defn build-claim
   "Build a claim"
