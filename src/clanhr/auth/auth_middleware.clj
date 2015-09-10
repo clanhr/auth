@@ -15,13 +15,15 @@
     (get-in context [:request :params :token])
     (get-header context "x-clanhr-auth-token")))
 
-(defn- add-principal
+(defn add-principal
   "Adds principal info to the request"
   [context result]
   (let [email (get-in result [:claims :iss :email])
-        account (get-in result [:claims :iss :account])]
+        account (get-in result [:claims :iss :account])
+        user-id (get-in result [:claims :iss :user-id])]
     (assoc context :principal {:email email
-                               :account account})))
+                               :account account
+                               :user-id user-id})))
 
 (defn run
   "Performs validation"
