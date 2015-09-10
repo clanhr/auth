@@ -22,7 +22,7 @@
    :iat (now)})
 
 (defn token-for
-  "Creates a token for a user"
+  "Creates a token for given args"
   [args]
   (-> (build-claim args)
       jwt
