@@ -29,6 +29,7 @@
 (deftest extract-data-test
   (let [data {:user {:name "bob_the_builder"
                      :email "bubu@mail.com"
+                     :account-id "account_id"
                      :account "account"
                      :user-id "user_id"}
               :password "spoon"}
@@ -37,4 +38,5 @@
         result (auth-middleware/add-principal {} result-valid)]
     (is (= (get-in data [:user :user-id]) (get-in result [:principal :user-id])))
     (is (= (get-in data [:user :account]) (get-in result [:principal :account])))
+    (is (= (get-in data [:user :account-id]) (get-in result [:principal :account-id])))
     (is (= (get-in data [:user :email]) (get-in result [:principal :email])))))
