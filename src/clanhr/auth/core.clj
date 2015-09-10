@@ -24,7 +24,7 @@
 (defn token-for
   "Creates a token for a user"
   [args]
-  (-> (build-claim (args :user))
+  (-> (build-claim args)
       jwt
       (sign :HS256 (secret))
       to-str))

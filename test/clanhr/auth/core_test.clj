@@ -4,13 +4,14 @@
 
 (deftest generate-token-test
   (testing "generation"
-    (let [token (auth/token-for {:user "bob_the_builder" :password "spoon"})]
+    (let [data {:user "bob_the_builder" :password "spoon"}
+          token (auth/token-for data)]
       (is token)
       (testing "verify")
         (let [result (auth/parse token)]
           (is result)
           (is (auth/valid? result))
-          (is (= "bob_the_builder" (auth/principal result)))))))
+          (is (= data (auth/principal result)))))))
 
 (deftest build-claim-test
   (let [user {:user "bob_the_builder"}]
