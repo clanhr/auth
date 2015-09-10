@@ -25,14 +25,3 @@
         (let [response ((auth-middleware/run handler) (request :get "/"))]
           (is (= 401
                  (:status response))))))))
-
-(deftest extract-data-test
-  (let [data {:user "bob_the_builder"
-              :password "spoon"
-              :email "bubu@mail.com"
-              :account "account"
-              :user-id "user_id"}
-        token (auth/token-for data)
-        result-valid (auth-middleware/valid? token)
-        result (auth-middleware/add-principal {} result-valid)]
-    (is (get-in result [:principal :user-id]))))
