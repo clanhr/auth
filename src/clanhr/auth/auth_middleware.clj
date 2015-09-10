@@ -20,9 +20,11 @@
   [context result]
   (let [email (get-in result [:claims :iss :email])
         account (get-in result [:claims :iss :account])
+        account-id (get-in result [:claims :iss :account-id])
         user-id (get-in result [:claims :iss :user-id])]
     (assoc context :principal {:email email
                                :account account
+                               :account-id account-id
                                :user-id user-id})))
 
 (defn run
