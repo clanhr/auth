@@ -1,6 +1,6 @@
 (ns clanhr.auth.auth-middleware-test
   (require [clanhr.auth.auth-middleware :as auth-middleware]
-            [clanhr.auth.core :as auth])
+           [clanhr.auth.core :as auth])
   (use clojure.test
         ring.mock.request))
 
