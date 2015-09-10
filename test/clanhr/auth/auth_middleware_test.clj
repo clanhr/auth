@@ -27,14 +27,14 @@
                  (:status response))))))))
 
 (deftest extract-data-test
-  (let [data {:user "bob_the_builder"
-              :password "spoon"
-              :email "bubu@mail.com"
-              :account "account"
-              :user-id "user_id"}
+  (let [data {:user {:name "bob_the_builder"
+                     :email "bubu@mail.com"
+                     :account "account"
+                     :user-id "user_id"}
+              :password "spoon"}
         token (auth/token-for data)
         result-valid (auth-middleware/valid? token)
         result (auth-middleware/add-principal {} result-valid)]
-    (is (= (:user-id data ) (get-in result [:principal :user-id])))
-    (is (= (:account data ) (get-in result [:principal :account])))
-    (is (= (:email data ) (get-in result [:principal :email])))))
+    (is (= (get-in data [:user :user-id]) (get-in result [:principal :user-id])))
+    (is (= (get-in data [:user :account]) (get-in result [:principal :account])))
+    (is (= (get-in data [:user :email]) (get-in result [:principal :email])))))
