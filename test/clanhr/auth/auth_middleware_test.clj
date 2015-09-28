@@ -10,12 +10,21 @@
         data {:user "bob_the_builder"
               :password "spoon"}
         token (auth/token-for data)]
-    (testing "should pass"
+    (testing "should pass on x-clanhr-auth-token"
       (letfn [(handler [request]
                 response-hash)]
         (let [req (request :get "/")
               response ((auth-middleware/run handler)
                         (header req "x-clanhr-auth-token" token))]
+          (is (= 200
+                 (:status response))))))
+
+    (testing "should pass auth-token"
+      (letfn [(handler [request]
+                response-hash)]
+        (let [req (request :get "/")
+              response ((auth-middleware/run handler)
+                        (header req "auth-token" token))]
           (is (= 200
                  (:status response))))))
 

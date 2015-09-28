@@ -13,6 +13,7 @@
   [context]
   (or
     (get-in context [:request :params :token])
+    (get-header context "auth-token")
     (get-header context "x-clanhr-auth-token")))
 
 (defn add-principal
