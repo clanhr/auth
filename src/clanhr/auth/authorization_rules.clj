@@ -7,4 +7,6 @@
 (defn run
   "Check if role can perform action"
   [action roles]
-  (result/presence (some (set roles) (action rules))))
+  (if (some (set roles) (action rules))
+    (result/success)
+    (result/unauthorised)))
