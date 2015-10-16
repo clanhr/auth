@@ -23,11 +23,15 @@
 
 (defn token-for
   "Creates a token for a user"
-  [args]
-  (-> (build-claim (:user args))
-      jwt
-      (sign :HS256 (secret))
-      to-str))
+  ([args]
+   (-> (build-claim (:user args))
+       jwt
+       (sign :HS256 (secret))
+       to-str))
+  ([user-email user-id account-id]
+   (token-for {:user {:email user-email
+                      :account account-id
+                      :user-id user-id}})))
 
 (defn parse
   "Parse token"
