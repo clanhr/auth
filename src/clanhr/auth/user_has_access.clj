@@ -8,7 +8,7 @@
 (defn get-roles
   [context]
   (if-let [result (:get-user-roles-result context)]
-    result
+    (go result)
     (clanhr-api/http-get {:service :directory-api
                           :path (str "/user/" (:user-id context) "/roles")
                           :token (:token context)})))
@@ -16,6 +16,7 @@
 (defn run
   "Check if user is authorized to do some action"
   [context]
-  (result/async-enforce-let [result (get-roles context)]
-    (authorization-rules/run (:action context)
-                             (:roles result))))
+  (go
+    (result/enforce-let [result (<! (get-roles context))]
+      (authorization-rules/run (:action context)
+                               (:roles result)))))
