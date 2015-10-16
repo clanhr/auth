@@ -1,4 +1,4 @@
-(ns clanhr.auth.user-has-access
+(ns clanhr.auth.authorized
   (:require [clanhr.auth.core :as auth]
             [clanhr.auth.authorization-rules :as authorization-rules]
             [clojure.core.async :refer [<! go]]
@@ -13,7 +13,7 @@
                           :path (str "/user/" (:user-id context) "/roles")
                           :token (:token context)})))
 
-(defn run
+(defn authorized?
   "Check if user is authorized to do some action"
   [context]
   (go
