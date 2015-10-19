@@ -8,5 +8,5 @@
   "Check if role can perform action"
   [action roles]
   (if (some (set roles) (action rules))
-    (result/success)
+    (result/success {:roles roles})
     (result/unauthorised)))
