@@ -7,14 +7,14 @@
 
 (deftest user-has-access-test
   (testing "has access"
-    (let [context {:get-user-roles-result (result/success {:roles [:hrmanager]})
+    (let [context {:get-user-roles-result (result/success {:roles ["hrmanager"]})
                    :action :notifications-access}
           result (<!! (auth/authorized? context))]
       (is (result/succeeded? result))
-      (is (= [:hrmanager] (:roles result)))))
+      (is (= ["hrmanager"] (:roles result)))))
 
   (testing "do not have access"
-    (let [context {:get-user-roles-result (result/success {:roles [:bubu-role]})
+    (let [context {:get-user-roles-result (result/success {:roles ["bubu-role"]})
                    :action :notifications-access}
           result (<!! (auth/authorized? context))]
       (is (result/unauthorised? result)))))

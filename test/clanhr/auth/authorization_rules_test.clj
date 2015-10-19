@@ -7,18 +7,18 @@
 (deftest authorization-rules-test
   (testing "has access"
     (is (result/succeeded?
-          (authorization-rules/run :notifications-access [:admin])))
+          (authorization-rules/run :notifications-access ["admin"])))
     (is (result/succeeded?
-          (authorization-rules/run :notifications-access [:hrmanager])))
+          (authorization-rules/run :notifications-access ["hrmanager"])))
     (is (result/succeeded?
-          (authorization-rules/run :notifications-access [:manager])))
+          (authorization-rules/run :notifications-access ["manager"])))
     (is (result/succeeded?
-          (authorization-rules/run :notifications-access [:hrmanager :manager])))
+          (authorization-rules/run :notifications-access ["hrmanager" "manager"])))
     (is (result/succeeded?
-          (authorization-rules/run :notifications-access [:admin :manager])))
+          (authorization-rules/run :notifications-access ["admin" "manager"])))
     (is (result/succeeded?
-          (authorization-rules/run :notifications-access [:admin :hrmanager]))))
+          (authorization-rules/run :notifications-access ["admin" "hrmanager"]))))
 
   (testing "do not have access"
     (is (result/unauthorised?
-          (authorization-rules/run :notifications-access [:bubu-role])))))
+          (authorization-rules/run :notifications-access ["bubu-role"])))))
