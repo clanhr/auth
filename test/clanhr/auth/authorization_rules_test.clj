@@ -20,5 +20,5 @@
           (authorization-rules/run :notifications-access ["admin" "hrmanager"]))))
 
   (testing "do not have access"
-    (is (result/unauthorised?
+    (is (result/forbidden?
           (authorization-rules/run :notifications-access ["bubu-role"])))))
