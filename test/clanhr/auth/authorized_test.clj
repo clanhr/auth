@@ -17,4 +17,4 @@
     (let [context {:get-user-roles-result (result/success {:roles ["bubu-role"]})
                    :action :notifications-access}
           result (<!! (auth/authorized? context))]
-      (is (result/unauthorised? result)))))
+      (is (result/forbidden? result)))))
