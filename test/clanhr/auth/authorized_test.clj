@@ -18,3 +18,17 @@
                    :action :notifications-access}
           result (<!! (auth/authorized? context))]
       (is (result/forbidden? result)))))
+
+(deftest specific-user-has-access-test
+  (testing "has access"
+    (let [context {:user {:system {:roles ["hrmanager"]}}
+                   :action :notifications-access}
+          result (<!! (auth/authorized? context))]
+      (is (result/succeeded? result))
+      (is (= ["hrmanager"] (:roles result)))))
+
+  (testing "do not have access"
+    (let [context {:user {:system {:roles ["waza"]}}
+                   :action :notifications-access}
+          result (<!! (auth/authorized? context))]
+      (is (result/forbidden? result)))))
