@@ -13,10 +13,14 @@
                           :path (str "/user/" (:user-id context) "/roles")
                           :token (:token context)})))
 
-(defn authorized?
-  "Check if user is authorized to do some action"
-  [context]
+(defmulti authorized?
+  (fn [context]
+    (cond
+      (:user context) :by-user)))
+
+(defmethod authorized? :default [context]
   (go
     (result/enforce-let [result (<! (get-roles context))]
       (authorization-rules/run (:action context)
                                (:roles result)))))
+
