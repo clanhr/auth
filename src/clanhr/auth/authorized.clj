@@ -18,6 +18,11 @@
     (cond
       (:user context) :by-user)))
 
+(defmethod authorized? :by-user [context]
+  (go
+    (let [roles (get-in context [:user :system :roles])]
+      (authorization-rules/run (:action context) roles))))
+
 (defmethod authorized? :default [context]
   (go
     (result/enforce-let [result (<! (get-roles context))]
