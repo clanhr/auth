@@ -2,7 +2,7 @@
   (:require [result.core :as result]))
 
 (def rules
-  {:notifications-access ["admin" "hrmanager" "manager"]
+  {:notifications-access ["admin" "hrmanager" "manager" "user"]
    :reports-access ["admin" "hrmanager" "manager"]
    :can-manage-absences ["admin" "hrmanager"]
    :delete-user ["admin" "hrmanager"]})
