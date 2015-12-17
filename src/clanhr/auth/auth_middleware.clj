@@ -34,7 +34,6 @@
   (fn [context]
     (let [token (extract-token-from context)
           result (valid? token)]
-      (println ",,,,,," result)
       (if (result/succeeded? result)
         (handler (-> context
                      (add-principal result)))
