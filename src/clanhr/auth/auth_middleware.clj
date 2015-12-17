@@ -14,7 +14,7 @@
   (or
     (get-header context "auth-token")
     (get-header context "x-clanhr-auth-token")
-    (get-in context [:query-params :token])))
+    (get-in context [:query-params "token"])))
 
 (defn add-principal
   "Adds principal info to the request"

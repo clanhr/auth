@@ -31,7 +31,7 @@
     (testing "should pass on token query param"
       (letfn [(handler [request]
                 response-hash)]
-        (let [req (assoc (request :get "/") :query-params {:token token})
+        (let [req (assoc (request :get "/") :query-params {"token" token})
               response ((auth-middleware/run handler) req)]
           (is (= 200
                  (:status response))))))
