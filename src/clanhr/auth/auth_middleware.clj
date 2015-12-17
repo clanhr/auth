@@ -36,5 +36,6 @@
           result (valid? token)]
       (if (result/succeeded? result)
         (handler (-> context
-                     (add-principal result)))
+                     (add-principal result)
+                     (assoc :token token)))
         (reply/unauthorized)))))
