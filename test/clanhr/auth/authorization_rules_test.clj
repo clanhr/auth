@@ -17,8 +17,16 @@
     (is (result/succeeded?
           (authorization-rules/run :notifications-access ["admin" "manager"])))
     (is (result/succeeded?
+          (authorization-rules/run :notifications-access nil)))
+    (is (result/succeeded?
+          (authorization-rules/run :notifications-access "")))
+    (is (result/succeeded?
           (authorization-rules/run :notifications-access ["admin" "hrmanager"]))))
 
   (testing "do not have access"
     (is (result/forbidden?
-          (authorization-rules/run :notifications-access ["bubu-role"])))))
+          (authorization-rules/run :notifications-access ["bubu-role"])))
+    (is (result/forbidden?
+          (authorization-rules/run :reports-access nil)))
+    (is (result/forbidden?
+          (authorization-rules/run :reports-access "")))))
