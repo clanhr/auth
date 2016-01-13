@@ -5,6 +5,7 @@
   {:notifications-access ["admin" "hrmanager" "manager" "user" "" "staff"]
    :reports-access ["admin" "hrmanager" "manager" "staff"]
    :can-manage-absences ["admin" "hrmanager" "staff"]
+   :can-see-full-user-info ["admin" "hrmanager" "staff"]
    :delete-user ["admin" "hrmanager" "staff"]})
 
 (defn run

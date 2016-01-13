@@ -1,4 +1,4 @@
-(defproject clanhr/auth "1.8.0"
+(defproject clanhr/auth "1.9.0"
   :description "ClanHR's Auth Library"
   :url "https://github.com/clanhr/auth"
   :license {:name "The MIT License"
