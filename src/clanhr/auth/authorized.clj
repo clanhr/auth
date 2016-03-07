@@ -26,7 +26,9 @@
 (defmethod authorized? :by-user [context]
   (go
     (let [roles (get-in context [:user :system :roles])]
-      (authorization-rules/run (:action context) roles))))
+      (result/enforce-let [auth-result (authorization-rules/run (:action context) roles)
+                           subscription-enabled? (<! (get-roles context))]
+        auth-result))))
 
 (defn- token-present
   "Success if the token is present on the context"
@@ -41,4 +43,3 @@
                          result (<! (get-roles context))]
       (authorization-rules/run (:action context)
                                (:roles result)))))
-
