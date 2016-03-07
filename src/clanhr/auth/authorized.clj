@@ -1,9 +1,15 @@
 (ns clanhr.auth.authorized
   (:require [clanhr.auth.core :as auth]
+            [environ.core :refer [env]]
             [clanhr.auth.authorization-rules :as authorization-rules]
             [clojure.core.async :refer [<! go]]
             [clanhr-api.core :as clanhr-api]
             [result.core :as result]))
+
+(defn- directory-api-endpoint
+  "Gets the current directory api endpoint"
+  []
+  (:clanhr-directory-api env))
 
 (defn- mock-response
   "The mocked response, is available"
@@ -14,9 +20,11 @@
   [context]
   (if-let [result (mock-response context)]
     (go result)
-    (clanhr-api/http-get {:service :directory-api
-                          :path (str "/user/" (:user-id context) "/roles")
-                          :token (:token context)})))
+    (if-let [directory-api (directory-api-endpoint)]
+      (clanhr-api/http-get {:service :directory-api
+                            :path (str "/user/" (:user-id context) "/roles")
+                            :token (:token context)})
+      (result/success))))
 
 (defmulti authorized?
   (fn [context]
