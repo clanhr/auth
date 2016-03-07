@@ -1,13 +1,21 @@
 (ns clanhr.auth.authorization-rules
   (:require [result.core :as result]))
 
-(def rules
-  {:notifications-access ["admin" "hrmanager" "manager" "user" "" "staff"]
-   :reports-access ["admin" "hrmanager" "manager" "staff"]
-   :can-manage-absences ["admin" "hrmanager" "staff"]
-   :settings-access ["admin" "hrmanager" "staff"]
-   :can-see-full-user-info ["admin" "hrmanager" "staff"]
-   :delete-user ["admin" "hrmanager" "staff"]})
+(def ^:const profile
+  "Template role profiles for easy access"
+  {:full-access ["admin" "hrmanager" "manager" "user" "" "staff"]
+   :board-member-manager ["admin" "hrmanager" "manager" "staff"]
+   :board-member ["admin" "hrmanager" "staff"]})
+
+(def ^:const rules
+  "Maps specific actions or zones to allowed roles"
+  {:directory-access (:full-access profile)
+   :notifications-access (:full-access profile)
+   :reports-access (:board-member-manager profile)
+   :can-manage-absences (:board-member profile)
+   :settings-access (:board-member profile)
+   :can-see-full-user-info (:board-member profile)
+   :delete-user (:board-member profile)})
 
 (defn run
   "Check if role can perform action"
