@@ -24,7 +24,7 @@
       (clanhr-api/http-get {:service :directory-api
                             :path (str "/user/" (:user-id context) "/roles")
                             :token (:token context)})
-      (result/success))))
+      (go (result/success)))))
 
 (defmulti authorized?
   (fn [context]
