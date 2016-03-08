@@ -29,7 +29,6 @@
 (deftest specific-user-has-access-test
   (testing "has access"
     (let [context {:user {:system {:roles ["hrmanager"]}}
-                   :get-user-roles-result (result/success)
                    :action :notifications-access}
           result (<!! (auth/authorized? context))]
       (is (result/succeeded? result))
@@ -45,7 +44,6 @@
 
   (testing "do not have access"
     (let [context {:user {:system {:roles ["waza"]}}
-                   :get-user-roles-result (result/success)
                    :action :notifications-access}
           result (<!! (auth/authorized? context))]
       (is (result/forbidden? result)))))
