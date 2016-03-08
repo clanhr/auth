@@ -52,7 +52,7 @@
               :password "spoon"}
         token (auth/token-for data)
         result-valid (auth-middleware/valid? token)
-        result (auth-middleware/add-principal {} result-valid)]
+        result (auth-middleware/add-principal {} result-valid "some-token")]
     (is (= (get-in data [:user :user-id]) (get-in result [:principal :user-id])))
     (is (= (get-in data [:user :account]) (get-in result [:principal :account])))
     (is (= (get-in data [:user :account-id]) (get-in result [:principal :account-id])))

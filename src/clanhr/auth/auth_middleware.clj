@@ -18,7 +18,7 @@
 
 (defn add-principal
   "Adds principal info to the request"
-  [context result]
+  [context result token]
   (let [email (get-in result [:claims :iss :email])
         account (get-in result [:claims :iss :account])
         account-id (get-in result [:claims :iss :account-id])
@@ -26,7 +26,8 @@
     (assoc context :principal {:email email
                                :account account
                                :account-id account-id
-                               :user-id user-id})))
+                               :user-id user-id}
+                   :token token)))
 
 (defn run
   "Performs validation"
@@ -36,5 +37,5 @@
           result (valid? token)]
       (if (result/succeeded? result)
         (handler (-> context
-                     (add-principal result)))
+                     (add-principal result token)))
         (reply/unauthorized)))))
