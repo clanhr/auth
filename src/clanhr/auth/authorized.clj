@@ -16,6 +16,13 @@
   [context]
   (:get-user-roles-result context))
 
+(defn- token-present
+  "Success if the token is present on the context"
+  [context]
+  (result/presence (or (:token context)
+                       (mock-response context))
+                   "no-token-on-context"))
+
 (defn get-roles
   [context]
   (if-let [result (mock-response context)]
@@ -26,6 +33,14 @@
                             :token (:token context)})
       (go (result/success)))))
 
+(defn get-token
+  "Gets the token for a user"
+  [context user]
+  (or (:token context)
+      (auth/token-for (get-in user [:system :email])
+                      (get-in user [:_id])
+                      (get-in user [:systen :account]))))
+
 (defmulti authorized?
   (fn [context]
     (cond
@@ -33,17 +48,13 @@
 
 (defmethod authorized? :by-user [context]
   (go
-    (let [roles (get-in context [:user :system :roles])]
-      (result/enforce-let [auth-result (authorization-rules/run (:action context) roles)
+    (let [roles (get-in context [:user :system :roles])
+          context (assoc context :user-id (get-in context [:user :_id])
+                                 :token (get-token context (get-in context [:user])))]
+      (result/enforce-let [token? (token-present context)
+                           auth-result (authorization-rules/run (:action context) roles)
                            subscription-enabled? (<! (get-roles context))]
         auth-result))))
-
-(defn- token-present
-  "Success if the token is present on the context"
-  [context]
-  (result/presence (or (:token context)
-                       (mock-response context))
-                   "no-token-on-context"))
 
 (defmethod authorized? :default [context]
   (go
