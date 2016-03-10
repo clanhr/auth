@@ -39,7 +39,7 @@
   (or (:token context)
       (auth/token-for (get-in user [:system :email])
                       (get-in user [:_id])
-                      (get-in user [:systen :account]))))
+                      (get-in user [:system :account]))))
 
 (defmulti authorized?
   (fn [context]
