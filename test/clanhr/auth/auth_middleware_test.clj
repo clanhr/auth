@@ -36,6 +36,14 @@
           (is (= 200
                  (:status response))))))
 
+    (testing "should pass an api_key as query param"
+      (letfn [(handler [request]
+                response-hash)]
+        (let [req (assoc (request :get "/") :query-params {"api_key" token})
+              response ((auth-middleware/run handler) req)]
+          (is (= 200
+                 (:status response))))))
+
     (testing "should fail"
       (letfn [(handler [request]
                 response-hash)]
