@@ -52,9 +52,8 @@
           context (assoc context :user-id (get-in context [:user :_id])
                                  :token (get-token context (get-in context [:user])))]
       (result/enforce-let [token? (token-present context)
-                           auth-result (authorization-rules/run (:action context) roles)
-                           subscription-enabled? (<! (get-roles context))]
-        auth-result))))
+                           result (<! (get-roles context))]
+        (authorization-rules/run (:action context) roles)))))
 
 (defmethod authorized? :default [context]
   (go
