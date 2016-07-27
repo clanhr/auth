@@ -47,3 +47,9 @@
                    :action :notifications-access}
           result (<!! (auth/authorized? context))]
       (is (result/forbidden? result)))))
+
+(deftest get-url-test
+  (is (= (auth/get-url {:user-id "1"})
+         "/user/1/roles"))
+  (is (= (auth/get-url {:user-id "1" :other-user-id "2"})
+         "/user/1/roles?other=2")))
