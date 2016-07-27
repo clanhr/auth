@@ -13,6 +13,7 @@
    :notifications-access (:full-access profile)
    :reports-access (:board-member-manager profile)
    :can-manage-absences (:board-member profile)
+   :change-absence-state (conj (:board-member profile) "approver")
    :settings-access (:board-member profile)
    :can-see-full-user-info (:board-member profile)
    :delete-user (:board-member profile)})

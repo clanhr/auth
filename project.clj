@@ -1,4 +1,4 @@
-(defproject clanhr/auth "1.12.0"
+(defproject clanhr/auth "1.13.0"
   :description "ClanHR's Auth Library"
   :url "https://github.com/clanhr/auth"
   :license {:name "The MIT License"
@@ -13,5 +13,7 @@
                 [clj-jwt "0.1.1"]
                 [clj-time "0.11.0"]]
   :plugins [[lein-environ "1.0.2"]]
-  :profiles {:test {:env {:secret "test_secret"}}
+  :aliases {"autotest" ["trampoline" "with-profile" "+test" "test-refresh"]}
+  :profiles {:test {:env {:secret "test_secret"}
+                    :plugins [[com.jakemccrary/lein-test-refresh "0.15.0"]]}
              :dev {:env {:secret "dev_secret"}}})

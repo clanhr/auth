@@ -23,13 +23,21 @@
                        (mock-response context))
                    "no-token-on-context"))
 
+(defn get-url
+  "Gets the url to get the roles from"
+  [context]
+  (let [base-url (str "/user/" (:user-id context) "/roles")]
+    (if-let [other-user-id (:other-user-id context)]
+      (str base-url "?other=" other-user-id)
+      base-url)))
+
 (defn get-roles
   [context]
   (if-let [result (mock-response context)]
     (go result)
     (if-let [directory-api (directory-api-endpoint)]
       (clanhr-api/http-get {:service :directory-api
-                            :path (str "/user/" (:user-id context) "/roles")
+                            :path (get-url context)
                             :token (:token context)})
       (go (result/success)))))
 
@@ -50,11 +58,12 @@
   (go
     (let [roles (get-in context [:user :system :roles])
           context (assoc context :user-id (get-in context [:user :_id])
+                                 :other-user-id (or (:other-user-id context)
+                                                  (get-in context [:other-user :_id]))
                                  :token (get-token context (get-in context [:user])))]
       (result/enforce-let [token? (token-present context)
-                           auth-result (authorization-rules/run (:action context) roles)
-                           subscription-enabled? (<! (get-roles context))]
-        auth-result))))
+                           result (<! (get-roles context))]
+        (authorization-rules/run (:action context) roles)))))
 
 (defmethod authorized? :default [context]
   (go
