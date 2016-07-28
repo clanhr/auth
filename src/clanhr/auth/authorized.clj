@@ -63,7 +63,8 @@
                                  :token (get-token context (get-in context [:user])))]
       (result/enforce-let [token? (token-present context)
                            result (<! (get-roles context))]
-        (authorization-rules/run (:action context) roles)))))
+        (authorization-rules/run (:action context)
+                                 (concat roles (:roles result)))))))
 
 (defmethod authorized? :default [context]
   (go
