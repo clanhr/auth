@@ -16,6 +16,7 @@
    :can-manage-roles (:board-member profile)
    :can-manage-settings (:board-member profile)
    :can-manage-alerts (:board-member profile)
+   :can-manage-holidays (:board-member profile)
    :change-absence-state (conj (:board-member profile) "approver")
    :settings-access (:board-member profile)
    :can-see-full-user-info (:board-member profile)
