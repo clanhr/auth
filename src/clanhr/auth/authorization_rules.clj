@@ -14,6 +14,7 @@
    :reports-access (:board-member-manager profile)
    :can-manage-absences (:board-member profile)
    :can-manage-roles (:board-member profile)
+   :can-manage-settings (:board-member profile)
    :change-absence-state (conj (:board-member profile) "approver")
    :settings-access (:board-member profile)
    :can-see-full-user-info (:board-member profile)
