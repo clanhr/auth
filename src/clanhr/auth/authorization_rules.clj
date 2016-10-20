@@ -12,6 +12,7 @@
   {:directory-access (:full-access profile)
    :notifications-access (:full-access profile)
    :reports-access (:board-member-manager profile)
+   :can-manage-groups (:board-member profile)
    :can-manage-absences (:board-member profile)
    :can-manage-roles (:board-member profile)
    :can-manage-settings (:board-member profile)
