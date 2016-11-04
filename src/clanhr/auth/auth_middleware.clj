@@ -23,10 +23,12 @@
   (let [email (get-in result [:claims :iss :email])
         account (get-in result [:claims :iss :account])
         account-id (get-in result [:claims :iss :account-id])
-        user-id (get-in result [:claims :iss :user-id])]
+        user-id (get-in result [:claims :iss :user-id])
+        system? (boolean (get-in result [:claims :iss :system]))]
     (assoc context :principal {:email email
                                :account account
                                :account-id account-id
+                               :system system?
                                :user-id user-id}
                    :token token)))
 

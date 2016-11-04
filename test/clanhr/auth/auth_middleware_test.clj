@@ -1,7 +1,7 @@
 (ns clanhr.auth.auth-middleware-test
-  (require [clanhr.auth.auth-middleware :as auth-middleware]
-           [clanhr.auth.core :as auth])
-  (use clojure.test
+  (:require [clanhr.auth.auth-middleware :as auth-middleware]
+            [clanhr.auth.core :as auth])
+  (:use clojure.test
         ring.mock.request))
 
 (deftest auth-test
@@ -43,6 +43,15 @@
               response ((auth-middleware/run handler) req)]
           (is (= 200
                  (:status response))))))
+
+    (testing "should pass system tokens"
+      (letfn [(handler [request]
+                (is (true? (get-in request [:principal :system])))
+                response-hash)]
+        (let [token (auth/system-token)
+              req (assoc (request :get "/") :query-params {"token" token})
+              response ((auth-middleware/run handler) req)]
+          (is (= 200 (:status response))))))
 
     (testing "should fail"
       (letfn [(handler [request]
