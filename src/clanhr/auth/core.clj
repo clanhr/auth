@@ -33,6 +33,11 @@
                       :account account-id
                       :user-id user-id}})))
 
+(defn system-token
+  "Creates a tokens used by the system/services to communicate with each other"
+  []
+  (token-for {:user {:name "clanhr-system" :system true}}))
+
 (defn parse
   "Parse token"
   [token]
