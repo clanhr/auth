@@ -6,7 +6,8 @@
   {:full-access ["admin" "hrmanager" "manager" "user" "" "staff"]
    :board-member-manager ["admin" "hrmanager" "manager" "staff"]
    :board-member ["admin" "hrmanager" "staff"]
-   :developer-member ["developer"]})
+   :developer-member ["developer"]
+   :administrator-member ["admin" "hrmanager"]})
 
 (def ^:const rules
   "Maps specific actions or zones to allowed roles"
@@ -23,7 +24,8 @@
    :change-absence-state (conj (:board-member profile) "approver")
    :settings-access (:board-member profile)
    :can-see-full-user-info (:board-member profile)
-   :delete-user (:board-member profile)})
+   :delete-user (:board-member profile)
+   :billing-actions-access (:administrator-member profile)})
 
 (defn run
   "Check if role can perform action"
