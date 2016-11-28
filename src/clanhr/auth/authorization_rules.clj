@@ -22,6 +22,7 @@
    :can-manage-holidays (:board-member profile)
    :can-mark-account-as-paid (:developer-member profile)
    :change-absence-state (conj (:board-member profile) "approver")
+   :change-expense-state (conj (:board-member profile) "approver")
    :settings-access (:board-member profile)
    :can-see-full-user-info (:board-member profile)
    :delete-user (:board-member profile)
