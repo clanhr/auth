@@ -15,4 +15,9 @@
     (testing "should failed"
       (let [another-token "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
             validate-result (validate-token/run another-token)]
-        (is (result/failed? validate-result))))))))
+        (is (result/failed? validate-result))))
+    (testing "invalid data"
+      (let [another-token "�"
+            result (validate-token/run another-token)]
+        (is (result/failed? result))
+        (is (result/exception? result))))))))

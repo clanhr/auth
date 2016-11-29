@@ -11,10 +11,13 @@
 (defn run
   "Validate json web token"
   [token]
-  (if token
-    (let [parsed-token (auth/parse token)
-          is-valid? (auth/valid? parsed-token)]
-      (if is-valid?
-        (result/success parsed-token)
-        (result/failure)))
-    (result/failure)))
+  (try
+    (if token
+      (let [parsed-token (auth/parse token)
+            is-valid? (auth/valid? parsed-token)]
+        (if is-valid?
+          (result/success parsed-token)
+          (result/failure)))
+      (result/failure))
+    (catch Exception e
+      (result/exception e))))
