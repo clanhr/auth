@@ -23,6 +23,7 @@
    :can-mark-account-as-paid (:developer-member profile)
    :change-absence-state (conj (:board-member profile) "approver")
    :change-expense-state (conj (:board-member profile) "approver")
+   :can-auto-approve-expenses ["approver"]
    :settings-access (:board-member profile)
    :can-see-full-user-info (:board-member profile)
    :delete-user (:board-member profile)
