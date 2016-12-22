@@ -38,6 +38,11 @@
   []
   (token-for {:user {:name "clanhr-system" :system true}}))
 
+(defn payment-token
+  "Creates a token used for payment flow"
+  []
+  (token-for {:user {:name "clanhr-payment" :payment true}}))
+
 (defn parse
   "Parse token"
   [token]
