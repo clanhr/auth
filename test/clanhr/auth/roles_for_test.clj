@@ -15,6 +15,16 @@
       (is (= "approver" (roles-for/approver user other-user)))
       (is (= nil (roles-for/approver other-user user))))))
 
+(deftest self-approver
+  (testing "should be self approver"
+    (let [user {:_id "1" :company-data {:manager-ids ["1"]}}
+          other-user {:_id "1"}]
+      (is (= "self-approver" (roles-for/self-approver user other-user)))))
+  (testing "should not be self approver"
+    (let [user {:_id "1" :company-data {:manager-ids ["2"]}}
+          other-user {:_id "2"}]
+      (is (= nil (roles-for/self-approver user other-user))))))
+
 (deftest run-test
   (let [user {:_id "1"}
         other-user {:company-data {:manager-ids ["1"]}}
