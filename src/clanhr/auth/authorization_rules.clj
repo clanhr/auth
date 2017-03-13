@@ -1,4 +1,12 @@
 (ns clanhr.auth.authorization-rules
+  "This namespace receives some action and a list of roles, then will check if
+   those roles can perform that given action. If yes, return a `result/success`
+   otherwise returns a `result/forbidden`
+
+   How do this namespace knows if some roles can perform the given action?
+
+   Simple, we have the `rules` map that has that info. We are mapping the actions
+   followed by the roles that can perform that specific action"
   (:require [result.core :as result]))
 
 (def ^:const profile
