@@ -1,15 +1,20 @@
 (ns clanhr.auth.auth-middleware
-  "Check if user is authenticated"
-  (require [clanhr.auth.user-validator :as validator]
-           [clanhr.reply.core :as reply]
-           [ring.util.response :refer [get-header]]
-           [result.core :as result]))
+  "Check if request is authenticated"
+  (:require [clanhr.auth.user-validator :as validator]
+            [clanhr.reply.core :as reply]
+            [ring.util.response :refer [get-header]]
+            [result.core :as result]))
 
 (defn valid?
   [token]
   (validator/run token))
 
 (defn extract-token-from
+  "Extracts token from the request. Usually the token is present in one of the
+   following headers `auth-token`, `x-clanhr-auth-token` or in the url given by
+   `token` or `api_key`.
+   A usecase where we might use the token in the url is when the user download
+   excel files."
   [context]
   (or
     (get-header context "auth-token")

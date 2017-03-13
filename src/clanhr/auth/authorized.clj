@@ -1,4 +1,14 @@
 (ns clanhr.auth.authorized
+  "This namespace is responsible to given an answer to this 2 questions:
+   Is this <user> be able to to this <action>?
+   Is this <user> be able to this <action> to this <other-user>?
+
+   This namespace will take care of the internals to process the request, like
+   getting the roles for each user and check if some user is manager of the other
+   user etc.
+
+   By doing this here each service should only give the minimum necessary inputs
+   to get an answer here which means that we are decoupling the system in a good way."
   (:require [clanhr.auth.core :as auth]
             [environ.core :refer [env]]
             [clanhr.auth.authorization-rules :as authorization-rules]

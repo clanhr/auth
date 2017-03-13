@@ -1,6 +1,6 @@
 (ns clanhr.auth.core_test
-  (use clojure.test)
-  (require [clanhr.auth.core :as auth]))
+  (:use clojure.test)
+  (:require [clanhr.auth.core :as auth]))
 
 (deftest generate-token-test
   (testing "generation"

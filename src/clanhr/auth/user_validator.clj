@@ -1,6 +1,8 @@
 (ns clanhr.auth.user-validator
-  (require [clanhr.auth.core :as auth]
-           [result.core :as result]))
+  "This namespace is used in the `clanhr.auth.auth-middleware` and does only
+   one thing, validates the given token"
+  (:require [clanhr.auth.core :as auth]
+            [result.core :as result]))
 
 (defn email
   "Get the email from the token"
