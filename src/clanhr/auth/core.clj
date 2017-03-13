@@ -1,11 +1,12 @@
 (ns clanhr.auth.core
-  "Handle auth tokens"
+  "This namespace has some utilities to deal with JWT's"
   (:require [environ.core :refer [env]]
             [clj-jwt.core  :refer :all]
             [clj-time.core :refer [now plus days]]))
 
 (defn secret
-  "Returns a secret based on environment variables"
+  "Returns a secret based on environment variables. This secret should be shared
+   and unique for all microservices of clanhr"
   ([]
    (secret env))
   ([env]
@@ -15,7 +16,9 @@
      (throw (Exception. "Can't resolve auth token")))))
 
 (defn build-claim
-  "Build a claim"
+  "Build a claim. the iss has the info that we want to share between the multiple
+   parties, the exp is the expiration date whenever the token will no longer be valid,
+   the iat is current timestamp"
   [user]
   {:iss user
    :exp (plus (now) (days 10))

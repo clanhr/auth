@@ -1,8 +1,8 @@
 (ns clanhr.auth.user-validator-test
-  (use clojure.test)
-  (require [clanhr.auth.user-validator :as validate-token]
-           [result.core :as result]
-           [clanhr.auth.core :as auth]))
+  (:use clojure.test)
+  (:require [clanhr.auth.user-validator :as validate-token]
+            [result.core :as result]
+            [clanhr.auth.core :as auth]))
 
 (deftest validate-user-token-test
   (let [data {:user "bob the builder"
