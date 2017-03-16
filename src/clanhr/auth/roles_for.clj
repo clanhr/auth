@@ -17,7 +17,7 @@
   [user other-user]
   (if-let [user-id (:_id user)]
     (when (and (= user-id (:_id other-user))
-             (some #{user-id} (get-in user [:company-data :manager-ids])))
+             (= user-id (get-in user [:company-data :approver-id])))
       "self-approver")))
 
 (defn get-roles
