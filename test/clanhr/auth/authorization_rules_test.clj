@@ -21,7 +21,9 @@
     (is (result/succeeded?
           (authorization-rules/run :notifications-access "")))
     (is (result/succeeded?
-          (authorization-rules/run :notifications-access ["admin" "hrmanager"]))))
+          (authorization-rules/run :notifications-access ["admin" "hrmanager"])))
+    (is (result/succeeded?
+          (authorization-rules/run :deactivate-user ["admin" "hrmanager"]))))
 
   (testing "do not have access"
     (is (result/forbidden?
@@ -29,4 +31,6 @@
     (is (result/forbidden?
           (authorization-rules/run :reports-access nil)))
     (is (result/forbidden?
-          (authorization-rules/run :reports-access "")))))
+          (authorization-rules/run :reports-access "")))
+    (is (result/forbidden?
+          (authorization-rules/run :deactivate-user ["manager" "" nil])))))
