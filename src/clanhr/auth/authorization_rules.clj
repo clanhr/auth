@@ -35,6 +35,7 @@
    :settings-access (:board-member profile)
    :can-see-full-user-info (:board-member profile)
    :delete-user (:board-member profile)
+   :deactivate-user (:board-member profile)
    :billing-actions-access (:administrator-member profile)})
 
 (defn run
