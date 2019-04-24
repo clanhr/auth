@@ -23,7 +23,11 @@
     (is (result/succeeded?
           (authorization-rules/run :notifications-access ["admin" "hrmanager"])))
     (is (result/succeeded?
-          (authorization-rules/run :deactivate-user ["admin" "hrmanager"]))))
+          (authorization-rules/run :deactivate-user ["admin" "hrmanager"])))
+    (is (result/succeeded?
+          (authorization-rules/run :change-expense-state ["expensesManager"])))
+    (is (result/succeeded?
+          (authorization-rules/run :can-auto-approve-expenses ["expensesManager"]))))
 
   (testing "do not have access"
     (is (result/forbidden?
