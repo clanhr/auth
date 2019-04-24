@@ -17,6 +17,9 @@
    :developer-member ["developer"]
    :administrator-member ["admin" "hrmanager"]})
 
+(def ^:const approver "approver")
+(def ^:const expenses-manager "expensesManager")
+
 (def ^:const rules
   "Maps specific actions or zones to allowed roles"
   {:directory-access (:full-access profile)
@@ -29,9 +32,9 @@
    :can-manage-alerts (:board-member profile)
    :can-manage-holidays (:board-member profile)
    :can-mark-account-as-paid (:developer-member profile)
-   :change-absence-state (conj (:board-member profile) "approver")
-   :change-expense-state (conj (:board-member profile) "approver")
-   :can-auto-approve-expenses (conj (:board-member profile) "approver")
+   :change-absence-state (conj (:board-member profile) approver)
+   :change-expense-state (conj (:board-member profile) approver expenses-manager)
+   :can-auto-approve-expenses (conj (:board-member profile) approver expenses-manager)
    :settings-access (:board-member profile)
    :can-see-full-user-info (:board-member profile)
    :delete-user (:board-member profile)
