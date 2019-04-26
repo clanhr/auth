@@ -27,7 +27,9 @@
     (is (result/succeeded?
           (authorization-rules/run :change-expense-state ["expensesManager"])))
     (is (result/succeeded?
-          (authorization-rules/run :can-auto-approve-expenses ["expensesManager"]))))
+          (authorization-rules/run :can-auto-approve-expenses ["expensesManager"])))
+    (is (result/succeeded?
+          (authorization-rules/run :reports-access ["absencesManager"]))))
 
   (testing "do not have access"
     (is (result/forbidden?
