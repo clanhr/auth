@@ -19,12 +19,13 @@
 
 (def ^:const approver "approver")
 (def ^:const expenses-manager "expensesManager")
+(def ^:const absences-manager "absencesManager")
 
 (def ^:const rules
   "Maps specific actions or zones to allowed roles"
   {:directory-access (:full-access profile)
    :notifications-access (:full-access profile)
-   :reports-access (:board-member-manager profile)
+   :reports-access (conj (:board-member-manager profile) absences-manager)
    :can-manage-groups (:board-member-manager profile)
    :can-manage-absences (:board-member profile)
    :can-manage-roles (:board-member profile)
