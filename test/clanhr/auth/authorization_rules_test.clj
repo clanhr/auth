@@ -29,7 +29,13 @@
     (is (result/succeeded?
           (authorization-rules/run :can-auto-approve-expenses ["expensesManager"])))
     (is (result/succeeded?
-          (authorization-rules/run :reports-access ["absencesManager"]))))
+          (authorization-rules/run :reports-access ["absencesManager"])))
+    (is (result/succeeded?
+          (authorization-rules/run :settings-access ["absencesManager"])))
+    (is (result/succeeded?
+          (authorization-rules/run :can-manage-absences ["absencesManager"])))
+    (is (result/succeeded?
+          (authorization-rules/run :change-absence-state ["absencesManager"]))))
 
   (testing "do not have access"
     (is (result/forbidden?
@@ -39,4 +45,6 @@
     (is (result/forbidden?
           (authorization-rules/run :reports-access "")))
     (is (result/forbidden?
-          (authorization-rules/run :deactivate-user ["manager" "" nil])))))
+          (authorization-rules/run :deactivate-user ["manager" "" nil])))
+    (is (result/forbidden?
+          (authorization-rules/run :billing-actions-access ["absencesManager" "expensesManager"])))))
