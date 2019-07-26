@@ -36,7 +36,7 @@
    :change-absence-state (conj (:board-member profile) approver absences-manager)
    :change-expense-state (conj (:board-member profile) approver expenses-manager)
    :can-auto-approve-expenses (conj (:board-member profile) approver expenses-manager)
-   :settings-access (conj (:board-member profile) absences-manager)
+   :settings-access (conj (:board-member profile) absences-manager expenses-manager)
    :can-see-full-user-info (:board-member profile)
    :delete-user (:board-member profile)
    :deactivate-user (:board-member profile)

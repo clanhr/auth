@@ -31,7 +31,7 @@
     (is (result/succeeded?
           (authorization-rules/run :reports-access ["absencesManager"])))
     (is (result/succeeded?
-          (authorization-rules/run :settings-access ["absencesManager"])))
+          (authorization-rules/run :settings-access ["absencesManager" "expensesManager"])))
     (is (result/succeeded?
           (authorization-rules/run :can-manage-absences ["absencesManager"])))
     (is (result/succeeded?
