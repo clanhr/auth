@@ -29,6 +29,8 @@
     (is (result/succeeded?
           (authorization-rules/run :can-auto-approve-expenses ["expensesManager"])))
     (is (result/succeeded?
+          (authorization-rules/run :can-auto-approve-expenses ["self-approver"])))
+    (is (result/succeeded?
           (authorization-rules/run :reports-access ["absencesManager"])))
     (is (result/succeeded?
           (authorization-rules/run :settings-access ["absencesManager" "expensesManager"])))
