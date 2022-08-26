@@ -1,4 +1,4 @@
-# ClanHR's Auth Library [![Build Status](https://travis-ci.org/clanhr/auth.svg)](https://travis-ci.org/clanhr/auth)
+# ClanHR's Auth Library [![Build Status](https://app.travis-ci.com/clanhr/auth.svg?branch=master)](https://app.travis-ci.com/clanhr/auth)
 
 [![Clojars Project](http://clojars.org/clanhr/auth/latest-version.svg)](http://clojars.org/clanhr/auth)
 
